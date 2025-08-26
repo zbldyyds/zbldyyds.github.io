@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的班级 - 六一小学</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary: #4a6bdf;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8f0ff 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 1;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="5" fill="white"/><circle cx="50" cy="50" r="10" fill="white"/><circle cx="80" cy="80" r="7" fill="white"/><circle cx="10" cy="80" r="8" fill="white"/><circle cx="80" cy="20" r="6" fill="white"/></svg>');
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .school-name {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+        
+        .class-card {
+            background: #f9faff;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .class-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 10px 0;
+        }
+        
+        .class-link i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .class-link:hover {
+            color: #2575fc;
+            transform: translateX(5px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .class-card {
+                padding: 20px;
+            }
+            
+            .class-link {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .class-link {
+                font-size: 1rem;
+            }
+            
+            .badge {
+                display: block;
+                margin: 10px 0 0 0;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="decoration"></div>
+            <div class="header-content">
+                <h1>我的班级</h1>
+                <h2>6年级开始记录</h2>
+                <div class="school-name">六一小学</div>
+            </div>
+        </header>
+        
+        <div class="content">
+            <h3>班级列表</h3>
+            
+            <div class="class-card">
+                <a href="zbldyyds.github.io/class/6_3class.html" target="_blank" rel="noopener" class="class-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    6年3班
+                </a>
+                <span class="badge">活跃班级</span>
+                <p style="margin-top: 15px; color: #666;">点击上方链接查看6年3班的详细信息、同学名单和活动记录。</p>
+            </div>
+            
+            <div class="footer">
+                <p>END | 最后编辑于 2025/8/26</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6年3班班级Wiki</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6bdf;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --bg-gradient: linear-gradient(135deg, #f5f7ff 0%, #e3e8ff 100%);
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        h1 .wiki-badge {
+            background: #F0F3FF;
+            color: rgba(0, 0, 0, 0.8);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.1rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-left: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: var(--secondary);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+
+        h3 {
+            color: var(--info);
+            margin: 20px 0 12px;
+        }
+
+        h4 {
+            color: var(--dark);
+            margin: 18px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .note {
+            background: #fff9e6;
+            padding: 15px;
+            border-left: 4px solid var(--warning);
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .student-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .student-table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .student-table tr:hover {
+            background: #e6eeff;
+            transition: var(--transition);
+        }
+
+        .student-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .student-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .editor {
+            background: #FFF9C4 !important;
+            font-weight: bold;
+        }
+
+        .transferred {
+            background: #666666 !important;
+            color: white !important;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--light);
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            color: white;
+        }
+
+        .tag-leader { background: var(--primary); }
+        .tag-subject { background: var(--info); }
+        .tag-sports { background: var(--success); }
+        .tag-other { background: var(--secondary); }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .student-table {
+                font-size: 0.9rem;
+            }
+            
+            .student-table th,
+            .student-table td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .student-table {
+                font-size: 0.8rem;
+            }
+            
+            .student-table th,
+            .student-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                6年3班<span class="wiki-badge">のwiki</span>
+            </h1>
+            <p class="subtitle">(<s>666，暑假延后三天看阅兵是针不戳~</s>)</p>
+        </header>
+
+        <main>
+            <h2>班级信息</h2>
+            <p>这是我们6年3班的班级Wiki，记录了班级成员和相关信息。</p>
+            
+            <div class="note">
+                <i class="fas fa-info-circle"></i> 此Wiki由github的存储库作为静态页面托管，感谢感谢十分感谢，最后更新于2025年8月26日
+            </div>
+
+            <h3>人员分布表</h3>
+            
+            <h4>学生：</h4>
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>职务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>张*宁</td>
+                        <td><span class="tag tag-leader">班长</span> 公认班长没变过（吧？）</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>张*瑄（我应该没写错吧qwq）</td>
+                        <td><span class="tag tag-subject">学习委员</span> 这学期还没平</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>卜*翔</td>
+                        <td>好像没有吧qwq</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>程*喆（是哪个yi我忘了[悲]）</td>
+                        <td>好像没有捏</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>才*藤</td>
+                        <td><span class="tag tag-subject">计算机课代表</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>王*轩（肯定没写错！！！）</td>
+                        <td><span class="tag tag-other">3好市民</span> 乐于助人</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>周*桐</td>
+                        <td>(<s>蛋仔派对课代表</s>)</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>袁*志</td>
+                        <td><s>蛋仔派对复课代表</s> <span class="tag tag-subject">语文课代表</span></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>耿*轩</td>
+                        <td>没有吧......</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>赵*初</td>
+                        <td><s>(赵德柱限时返场，648超划算！)</s></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>刘*翔</td>
+                        <td><span class="tag tag-sports">体委</span></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>武*怡（<s>五千亿</s>）</td>
+                        <td><span class="tag tag-sports">体委</span></td>
+                    </tr>
+                    <tr class="editor">
+                        <td>13</td>
+                        <td>张*源(也就是本Wiki编辑者)</td>
+                        <td>无业游民</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>周*恒</td>
+                        <td>空空如也......</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>李*yi（完辣忘了是哪个yi辣）</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>张*斌</td>
+                        <td>大力士没什么好说的</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>王*阳</td>
+                        <td>《竹竿》</td>
+                    </tr>
+                    <tr class="transferred">
+                        <td>18</td>
+                        <td>邹*雨</td>
+                        <td>4年级转校，可惜了，以前玩的挺好的......</td>
+                    </tr>
+                    <tr class="transferred">
+                        <td>19</td>
+                        <td>孙*航</td>
+                        <td>不知不觉的就转校了......</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>王*晴</td>
+                        <td>被李*廷追杀时可以找她避险</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>李*廷</td>
+                        <td><span class="tag tag-other">卫生委员</span></td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>李*君</td>
+                        <td>(大书法家)</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>陈*琴</td>
+                        <td><span class="tag tag-subject">数学课代表</span></td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>包*</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>李*悠</td>
+                        <td><span class="tag tag-subject">学习委员</span> 新学期未定</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>朱*悦</td>
+                        <td><span class="tag tag-other">劳动课代表</span> 好像是吧?</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>侯*杨（应该是这个杨吧qwq）</td>
+                        <td>没有捏~(￣▽￣)~*</td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>刘*婷</td>
+                        <td>bro为什么你有手机我没有！！！</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>安*伯</td>
+                        <td>暂无......</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>陈*萱</td>
+                        <td>似乎好像也许大概可能八成是没有吧</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>党*瑜</td>
+                        <td>没有！（确信）</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>杨*鋆（鋆字好难找ee）</td>
+                        <td>（信确）！有没</td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>李*清</td>
+                        <td><span class="tag tag-subject">语文课代表</span>！</td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td>郭*依（总算想起来还有这个了）</td>
+                        <td>没信！（确有）</td>
+                    </tr>
+                    <tr>
+                        <td>35*</td>
+                        <td>null</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>36*</td>
+                        <td>null</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            注：<span style="background-color:#666666;color:white;padding:3px 6px;border-radius:3px;">灰色背景</span>表示转出本班，*表示转入本班
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>老师：</h3>
+            <p>在做了在做了（悲</p>
+        </main>
+
+        <div class="footer">
+            <p>END|最后编辑于2025/8/26 | 感谢github的静态网页托管！</p>
+        </div>
+    </div>
+</body>
+</html>
