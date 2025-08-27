@@ -1,21 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>巧克力服群</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巧克力服群 - Minecraft服务器</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css" type="text/css">
+<style>
+    :root {
+        --primary-color: #7B3F00; /* 巧克力棕色 */
+        --secondary-color: #4CAF50; /* Minecraft绿色 */
+        --accent-color: #E91E63;
+        --light-color: #F5F5F5;
+        --dark-color: #333333;
+        --container-bg: rgba(255, 245, 225, 0.95);
+        --minecraft-dirt: #8B4513;
+        --minecraft-grass: #55AA55;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background: linear-gradient(135deg, var(--minecraft-dirt), var(--minecraft-grass));
+        background-attachment: fixed;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 800px;
+        background: var(--container-bg);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--primary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: var(--primary-color);
+    }
+    
+    .header {
+        text-align: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px dashed var(--primary-color);
+    }
+    
+    h1 {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+    
+    .subtitle {
+        color: var(--secondary-color);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    
+    .content p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        color: var(--dark-color);
+        padding-left: 10px;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .content p:hover {
+        border-left-color: var(--secondary-color);
+        padding-left: 15px;
+    }
+    
+    .strikethrough {
+        text-decoration: line-through;
+        color: #888;
+    }
+    
+    .server-info {
+        background: rgba(139, 69, 19, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border: 2px solid var(--primary-color);
+    }
+    
+    .server-info h2 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .info-item {
+        display: flex;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+    
+    .info-label {
+        font-weight: bold;
+        min-width: 120px;
+        color: var(--primary-color);
+    }
+    
+    .info-content {
+        flex: 1;
+        color: var(--dark-color);
+    }
+    
+    .cta-button {
+        display: block;
+        text-align: center;
+        background: var(--secondary-color);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 25px 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 0 rgba(76, 175, 80, 0.5);
+        position: relative;
+    }
+    
+    .cta-button:hover {
+        background: #3d8b40;
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 rgba(76, 175, 80, 0.5);
+    }
+    
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    .minecraft-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: var(--secondary-color);
+        margin-right: 5px;
+        position: relative;
+        top: 4px;
+        transform: rotate(45deg);
+    }
+    
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+        
+        .container {
+            padding: 20px 15px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
+        
+        .info-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .info-label {
+            margin-bottom: 5px;
+        }
+    }
+</style>
 </head>
 <body>
 
-<p>minceraft巧克力服的群：</p>
-<p>一个minecraft服务器群；</p>
-<p>和谐友爱 <span style="text-decoration: line-through;">除了01k</span>;</p>
-<p>生存服务器，插件核心，有shop，粘液科技插件，具体进群问303；</p>
-<p>非常好的一个服务器，在此写出群号和链接地址：</p>
-<p>QQ群：487881257（申请就写zbldyyds推荐，大概能过）</p>
-<p>minecraft服务器链接地址：mc.zgwl.eu.org</p>
-<p>备线：mccd.zgwl.eu.org</p>
-<p>（懒得输群号的<span style="text-decoration: line-through;">真的太懒了</span>可以<a title="点啊愣着干啥？" href="https://qm.qq.com/q/NpLHUyrRi6" target="_blank" rel="noopener">点击链接加入群聊【Minceraft巧克力服 | Online】</a>）</p>
+<div class="container">
+    <div class="header">
+        <h1>巧克力服群</h1>
+        <div class="subtitle">Minceraft巧克力服 | Online</div>
+    </div>
+    
+    <div class="content">
+        <p>minceraft巧克力服的群：</p>
+        <p>一个minecraft服务器群；</p>
+        <p>和谐友爱 <span class="strikethrough">除了01k</span>;</p>
+        <p>生存服务器，插件核心，有shop，粘液科技插件，具体进群问303；</p>
+        <p>非常好的一个服务器，在此写出群号和链接地址：</p>
+    </div>
+    
+    <div class="server-info">
+        <h2><span class="minecraft-icon"></span> 服务器信息</h2>
+        
+        <div class="info-item">
+            <div class="info-label">QQ群：</div>
+            <div class="info-content">487881257（申请就写zbldyyds推荐，大概能过）</div>
+        </div>
+        
+        <div class="info-item">
+            <div class="info-label">主线路：</div>
+            <div class="info-content">mc.zgwl.eu.org</div>
+        </div>
+        
+        <div class="info-item">
+            <div class="info-label">备用线路：</div>
+            <div class="info-content">mccd.zgwl.eu.org</div>
+        </div>
+    </div>
+    
+    <p>（懒得输群号<span class="strikethrough">真的太懒了</span>可以<a class="cta-button" title="点啊愣着干啥？" href="https://qm.qq.com/q/NpLHUyrRi6" target="_blank" rel="noopener">点击链接加入群聊【Minceraft巧克力服 | Online】</a>）</p>
+    
+    <div class="footer">
+        <p>欢迎来到巧克力服 - 开启你的冒险之旅！</p>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js" type="text/javascript"></script>
 <script type="text/javascript">hljs.highlightAll();</script>
