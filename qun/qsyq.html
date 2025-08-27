@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>茕山羊群</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root {
@@ -12,6 +11,7 @@
         --goat-light: #F5F5DC;
         --goat-dark: #654321;
         --goat-green: #556B2F;
+        --goat-green-light: #6B8E23;
         --goat-cream: #FFF8DC;
         --goat-shadow: rgba(139, 69, 19, 0.3);
     }
@@ -81,6 +81,20 @@
     .subtitle {
         font-style: italic;
         opacity: 0.9;
+        background: linear-gradient(45deg, var(--goat-green), var(--goat-green-light), #8FBC8F);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 3s ease infinite;
+        font-weight: bold;
+        text-shadow: 0 0 8px rgba(139, 195, 74, 0.3);
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
     
     .content {
@@ -293,7 +307,7 @@
     <div class="header">
         <i class="goat-icon">🐐</i>
         <h1>茕山羊群</h1>
-        <p class="subtitle">一个独特的社交(民国)群体验</p>
+        <p class="subtitle">一个独特的社(民国)交(民国)群体验</p>
     </div>
     
     <div class="content">
@@ -325,7 +339,5 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js" type="text/javascript"></script>
-<script type="text/javascript">hljs.highlightAll();</script>
 </body>
 </html>
