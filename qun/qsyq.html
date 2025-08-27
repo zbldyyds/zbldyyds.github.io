@@ -1,18 +1,329 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>茕山羊群</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --goat-brown: #8B4513;
+        --goat-light: #F5F5DC;
+        --goat-dark: #654321;
+        --goat-green: #556B2F;
+        --goat-cream: #FFF8DC;
+        --goat-shadow: rgba(139, 69, 19, 0.3);
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background: linear-gradient(135deg, var(--goat-light), var(--goat-cream));
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+    }
+    
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M0 0h80v80H0z' fill='%23f5f5dc'/%3E%3Cpath d='M20,20c0,0,5,10,20,0s20,0,20,0' stroke='%238B4513' fill='none' stroke-width='2' opacity='0.1'/%3E%3C/svg%3E");
+        opacity: 0.3;
+        z-index: -1;
+    }
+    
+    .container {
+        max-width: 800px;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px var(--goat-shadow);
+        border: 3px solid var(--goat-brown);
+        position: relative;
+    }
+    
+    .header {
+        background: linear-gradient(to right, var(--goat-brown), var(--goat-dark));
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .goat-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .subtitle {
+        font-style: italic;
+        opacity: 0.9;
+    }
+    
+    .content {
+        padding: 30px;
+        background: white;
+        position: relative;
+    }
+    
+    .content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(to right, var(--goat-brown), var(--goat-green), var(--goat-brown));
+    }
+    
+    .warning {
+        background: #FFF0F0;
+        border-left: 5px solid #FF6B6B;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+        position: relative;
+    }
+    
+    .warning::before {
+        content: '!';
+        position: absolute;
+        left: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 25px;
+        height: 25px;
+        background: #FF6B6B;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+    
+    .info-box {
+        background: var(--goat-cream);
+        border: 2px dashed var(--goat-brown);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        position: relative;
+    }
+    
+    .info-box::after {
+        content: 'ⓘ';
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 30px;
+        height: 30px;
+        background: var(--goat-brown);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    
+    p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        color: var(--goat-dark);
+        font-size: 1.1rem;
+    }
+    
+    .wiki-link {
+        color: var(--goat-green);
+        text-decoration: none;
+        font-weight: bold;
+        position: relative;
+        padding: 0 3px;
+        transition: all 0.3s ease;
+    }
+    
+    .wiki-link:hover {
+        color: var(--goat-brown);
+        text-decoration: underline;
+    }
+    
+    .wiki-link::after {
+        content: '↗';
+        margin-left: 3px;
+        font-size: 0.9em;
+    }
+    
+    .qq-info {
+        background: linear-gradient(to right, #FFEBC8, #FFFFFF);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        text-align: center;
+        border: 2px solid #FFD700;
+        box-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
+    }
+    
+    .qq-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--goat-dark);
+        letter-spacing: 2px;
+        margin: 10px 0;
+    }
+    
+    .lazy-button {
+        display: block;
+        text-align: center;
+        background: linear-gradient(to right, var(--goat-green), var(--goat-dark));
+        color: white;
+        padding: 16px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 25px auto;
+        transition: all 0.3s ease;
+        width: 80%;
+        box-shadow: 0 5px 15px var(--goat-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .lazy-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px var(--goat-shadow);
+    }
+    
+    .lazy-button:active {
+        transform: translateY(1px);
+    }
+    
+    .lazy-button::after {
+        content: '🐐';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+    }
+    
+    .footer {
+        text-align: center;
+        padding: 20px;
+        background: var(--goat-dark);
+        color: white;
+        font-size: 0.9rem;
+    }
+    
+    .goat-silhouette {
+        position: absolute;
+        opacity: 0.05;
+        font-size: 15rem;
+        z-index: 0;
+        pointer-events: none;
+    }
+    
+    .goat-1 {
+        bottom: -50px;
+        left: -30px;
+        transform: rotate(-15deg);
+    }
+    
+    .goat-2 {
+        top: -50px;
+        right: -30px;
+        transform: rotate(15deg);
+    }
+    
+    @media (max-width: 600px) {
+        .container {
+            margin: 10px;
+        }
+        
+        .header {
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .lazy-button {
+            width: 90%;
+            padding: 14px 20px;
+        }
+        
+        .goat-silhouette {
+            font-size: 10rem;
+        }
+    }
+</style>
 </head>
 <body>
 
-<p>茕山羊群：</p>
-<p>*警告：群友大部分时间在发癫；</p>
-<p>刚进去，不知道什么有用信息；</p>
-<p>可以看<a title="（茕山羊维基）" href="https://goatwiki.netlify.app/" target="_blank" rel="noopener">goatwiki</a>了解更多信息；</p>
-<p>QQ群：313458052</p>
-<p>（懒人专用：<a title="点啊！" href="https://qm.qq.com/q/Ky5C1tiIkq" target="_blank" rel="noopener">点击链接加入群聊【茕羊民国】</a>）</p>
+<div class="container">
+    <div class="header">
+        <i class="goat-icon">🐐</i>
+        <h1>茕山羊群</h1>
+        <p class="subtitle">一个独特的社交(民国)群体验</p>
+    </div>
+    
+    <div class="content">
+        <i class="goat-silhouette goat-1">🐐</i>
+        <i class="goat-silhouette goat-2">🐐</i>
+        
+        <p>茕山羊群：</p>
+        
+        <div class="warning">
+            <p>*警告：群友大部分时间在发癫；</p>
+        </div>
+        
+        <p>刚进去，不知道什么有用信息；</p>
+        
+        <div class="info-box">
+            <p>可以看<a class="wiki-link" title="（茕山羊维基）" href="https://goatwiki.netlify.app/" target="_blank" rel="noopener">goatwiki</a>了解更多信息；</p>
+        </div>
+        
+        <div class="qq-info">
+            <p>QQ群：</p>
+            <p class="qq-number">313458052</p>
+        </div>
+        
+        <p>（懒人专用：<a class="lazy-button" title="点啊！" href="https://qm.qq.com/q/Ky5C1tiIkq" target="_blank" rel="noopener">点击链接加入群聊【茕羊民国】</a>）</p>
+    </div>
+    
+    <div class="footer">
+        <p>🐐 欢迎加入茕山羊群 🐐</p>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js" type="text/javascript"></script>
 <script type="text/javascript">hljs.highlightAll();</script>
