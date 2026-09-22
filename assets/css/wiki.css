@@ -1,0 +1,145 @@
+/* wiki.css - 班级详情页 */
+
+.main {
+    padding-top: 8px;
+    padding-bottom: 56px;
+}
+
+.prose p {
+    margin-bottom: 16px;
+    max-width: 80ch;
+    color: var(--text);
+}
+
+.prose p:last-child {
+    margin-bottom: 0;
+}
+
+.prose s {
+    color: var(--text-faint);
+}
+
+.subtitle {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.subtitle s {
+    color: var(--text-faint);
+}
+
+.subtitle a {
+    font-family: var(--mono);
+    color: var(--blue-soft);
+    border-bottom: 1px solid var(--blue-dim);
+}
+
+.subtitle a:hover {
+    color: var(--green);
+    border-bottom-color: var(--green-dim);
+}
+
+.table-wrap {
+    overflow-x: auto;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    background: var(--line);
+}
+
+.student-table {
+    width: 100%;
+    min-width: 580px;
+    border-collapse: collapse;
+    background: var(--surface);
+}
+
+.student-table th {
+    background: var(--surface-3);
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.student-table td {
+    padding: 11px 14px;
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.student-table td:first-child {
+    width: 64px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-faint);
+}
+
+.student-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.student-table tbody tr:hover td {
+    background: var(--surface-2);
+}
+
+.student-table tr.editor td {
+    background: #131a15;
+    color: #a9d6bb;
+    font-weight: 700;
+}
+
+.student-table tr.editor:hover td {
+    background: #16201a;
+}
+
+.student-table tr.transferred td {
+    background: #0d0f10;
+    color: #5a6167;
+}
+
+.student-table tr.transferred:hover td {
+    background: #101314;
+}
+
+.student-table tr.legend td {
+    background: var(--surface-2);
+    color: var(--text-faint);
+    font-size: 13px;
+}
+
+.legend-swatch {
+    display: inline-block;
+    background: #4a4f54;
+    color: #e6eaec;
+    border: 1px solid var(--line-strong);
+    padding: 2px 7px;
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .student-table {
+        min-width: 500px;
+        font-size: 13px;
+    }
+
+    .student-table th,
+    .student-table td {
+        padding: 9px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-table {
+        min-width: 440px;
+        font-size: 12px;
+    }
+}

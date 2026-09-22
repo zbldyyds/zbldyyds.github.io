@@ -1,0 +1,566 @@
+/* base.css - 共享样式层 */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0a0b0c;
+    --bg-grid: rgba(255, 255, 255, 0.022);
+    --surface: #101214;
+    --surface-2: #16191c;
+    --surface-3: #1b1f23;
+    --line: #23272b;
+    --line-strong: #31363b;
+    --text: #ccd1d5;
+    --text-bright: #f2f4f5;
+    --text-dim: #868d93;
+    --text-faint: #5c646a;
+    --green: #3ea16b;
+    --green-dim: #1c3a2b;
+    --blue: #3f7fd4;
+    --blue-soft: #7aa5e6;
+    --blue-dim: #1d3355;
+    --amber: #b0863a;
+    --amber-dim: #3a2e15;
+    --mono: "Cascadia Mono", "JetBrains Mono", "SFMono-Regular", Consolas, "Microsoft YaHei", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--sans);
+    background-color: var(--bg);
+    background-image:
+        linear-gradient(var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 44px 44px;
+    color: var(--text);
+    line-height: 1.75;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+a {
+    color: var(--blue-soft);
+    text-decoration: none;
+    transition: color 0.16s ease, border-color 0.16s ease;
+}
+
+a:hover {
+    color: var(--green);
+}
+
+a:focus-visible,
+.card:focus-visible {
+    outline: 1px solid var(--blue);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: #1e3a5f;
+    color: #fff;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------- 顶栏 ---------- */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid var(--line);
+    background: rgba(10, 11, 12, 0.9);
+    backdrop-filter: blur(8px);
+}
+
+.topbar .shell {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--text-bright);
+}
+
+.brand:hover {
+    color: var(--text-bright);
+}
+
+.brand .mark {
+    width: 9px;
+    height: 9px;
+    background: var(--green);
+    display: block;
+}
+
+.crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+}
+
+.crumbs a {
+    color: var(--text-dim);
+}
+
+.crumbs a:hover {
+    color: var(--green);
+}
+
+.crumbs .sep {
+    color: var(--line-strong);
+}
+
+/* ---------- 页头 ---------- */
+
+.masthead {
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.masthead::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--green) 0%, var(--blue) 100%);
+}
+
+.masthead::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 28px solid var(--surface-3);
+    border-left: 28px solid transparent;
+}
+
+.masthead .inner {
+    padding-top: 56px;
+    padding-bottom: 44px;
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--line-strong);
+}
+
+.page-title {
+    margin-top: 18px;
+    font-size: clamp(30px, 6vw, 46px);
+    line-height: 1.16;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+
+.page-title .wiki-badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 14px;
+    transform: translateY(-6px);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--green);
+    background: #0d1611;
+    border: 1px solid var(--green-dim);
+    padding: 5px 11px;
+}
+
+.page-lead {
+    margin-top: 16px;
+    max-width: 62ch;
+    color: var(--text-dim);
+    font-size: 16px;
+}
+
+.page-lead a {
+    color: var(--blue-soft);
+    border-bottom: 1px solid var(--blue-dim);
+}
+
+.page-lead a:hover {
+    color: var(--green);
+    border-bottom-color: var(--green-dim);
+}
+
+.meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    padding: 6px 12px;
+}
+
+.chip-green {
+    color: var(--green);
+    background: #0d1611;
+    border-color: var(--green-dim);
+}
+
+/* ---------- 区块标题 ---------- */
+
+.section {
+    margin-top: 40px;
+}
+
+.section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 12px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.section-head .idx {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+}
+
+.section-head h2,
+.section-head h3 {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--text-bright);
+}
+
+.subhead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+}
+
+.subhead i {
+    color: var(--blue);
+    font-size: 13px;
+}
+
+.subhead::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+/* ---------- 卡片网格 ---------- */
+
+.grid {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+    position: relative;
+    background: var(--surface);
+    padding: 26px 24px;
+    transition: background 0.16s ease;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 12px solid var(--line-strong);
+    border-left: 12px solid transparent;
+    transition: border-top-color 0.16s ease;
+}
+
+.card:hover {
+    background: var(--surface-2);
+}
+
+.card:hover::after {
+    border-top-color: var(--green);
+}
+
+.card-ic {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 16px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface-2);
+    color: var(--blue-soft);
+    font-size: 15px;
+    transition: color 0.16s ease, border-color 0.16s ease;
+}
+
+.card:hover .card-ic {
+    color: var(--green);
+    border-color: var(--green-dim);
+}
+
+.card-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-bright);
+}
+
+.card-link {
+    display: inline-block;
+    margin-top: 10px;
+    width: fit-content;
+    max-width: 100%;
+    word-break: break-all;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--blue-soft);
+    border-bottom: 1px solid transparent;
+}
+
+.card-link:hover {
+    color: var(--green);
+    border-bottom-color: var(--green-dim);
+}
+
+.card-desc {
+    margin-top: 12px;
+    color: var(--text-dim);
+    font-size: 14px;
+}
+
+/* ---------- 提示块 ---------- */
+
+.note {
+    margin: 20px 0;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #c6b78e;
+    background: #14120c;
+    border: 1px solid var(--amber-dim);
+    border-left: 3px solid var(--amber);
+}
+
+.note i {
+    color: var(--amber);
+    margin-right: 6px;
+}
+
+.note a {
+    color: var(--blue-soft);
+    border-bottom: 1px solid var(--blue-dim);
+}
+
+.note a:hover {
+    color: var(--green);
+}
+
+/* ---------- 标签 ---------- */
+
+.tag {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+    padding: 2px 7px;
+    margin-right: 5px;
+    border: 1px solid;
+}
+
+.tag-leader {
+    color: var(--blue-soft);
+    background: #0e1624;
+    border-color: var(--blue-dim);
+}
+
+.tag-subject {
+    color: #6fc39a;
+    background: #0d1712;
+    border-color: var(--green-dim);
+}
+
+.tag-sports {
+    color: #d3b169;
+    background: #161207;
+    border-color: var(--amber-dim);
+}
+
+.tag-other {
+    color: #9aa1a7;
+    background: #141719;
+    border-color: var(--line-strong);
+}
+
+/* ---------- 页脚 ---------- */
+
+.site-foot {
+    margin-top: 56px;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    flex-shrink: 0;
+}
+
+.site-foot .shell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 20px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+}
+
+.site-foot .mark-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    background: var(--green);
+    vertical-align: middle;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 768px) {
+    .masthead .inner {
+        padding-top: 40px;
+        padding-bottom: 32px;
+    }
+
+    .page-lead {
+        font-size: 15px;
+    }
+
+    .section-head h2,
+    .section-head h3 {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+    }
+
+    .card {
+        padding: 22px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shell {
+        padding: 0 16px;
+    }
+
+    .topbar .shell {
+        height: 48px;
+    }
+
+    .brand {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+    }
+
+    .crumbs {
+        font-size: 11px;
+    }
+
+    .eyebrow {
+        letter-spacing: 0.18em;
+        font-size: 11px;
+    }
+
+    .page-title .wiki-badge {
+        display: block;
+        width: fit-content;
+        margin: 12px 0 0;
+        transform: none;
+    }
+}

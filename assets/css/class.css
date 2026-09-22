@@ -1,0 +1,94 @@
+/* class.css - 班级索引页 */
+
+.main {
+    padding-top: 8px;
+    padding-bottom: 56px;
+}
+
+.class-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 26px 24px;
+    transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.class-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 12px solid var(--line-strong);
+    border-left: 12px solid transparent;
+    transition: border-top-color 0.16s ease;
+}
+
+.class-card:hover {
+    background: var(--surface-2);
+    border-color: var(--line-strong);
+}
+
+.class-card:hover::after {
+    border-top-color: var(--green);
+}
+
+.class-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-bright);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.class-link i {
+    color: var(--green);
+    font-size: 16px;
+}
+
+.class-link:hover {
+    color: var(--green);
+    border-bottom-color: var(--green);
+}
+
+.class-badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: #0d1611;
+    border: 1px solid var(--green-dim);
+    padding: 4px 10px;
+}
+
+.class-desc {
+    margin-top: 16px;
+    color: var(--text-dim);
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .class-card {
+        padding: 22px 18px;
+    }
+
+    .class-link {
+        font-size: 16px;
+    }
+
+    .class-badge {
+        display: block;
+        width: fit-content;
+        margin: 12px 0 0;
+    }
+}
