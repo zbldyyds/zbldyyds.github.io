@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>点名 - zbldyyds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/rollcall.css">
+</head>
+<body>
+    <div class="topbar">
+        <div class="shell">
+            <a class="brand" href="./"><span class="mark"></span>ZBLDYYDS</a>
+            <nav class="crumbs">
+                <a href="./">首页</a>
+                <span class="sep">/</span>
+                <span>roll-call</span>
+            </nav>
+        </div>
+    </div>
+
+    <header class="masthead">
+        <div class="shell inner">
+            <div class="eyebrow">zbldyyds.github.io / roll-call</div>
+            <h1 class="page-title">点名器</h1>
+            <p class="page-lead">随机抽一位同学，点名 / 提问都挺好用的。</p>
+            <div class="meta-row">
+                <span class="chip chip-green">RANDOM PICK</span>
+                <span class="chip">GITHUB PAGES</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main shell">
+        <section class="section">
+            <div class="section-head">
+                <span class="idx">01</span>
+                <h3>开始点名</h3>
+            </div>
+
+            <div class="rc-wrap">
+                <div class="rc-stage">
+                    <div class="rc-display" id="display">
+                        <span class="rc-placeholder" id="placeholder">点下方按钮开始</span>
+                        <span class="rc-result" id="result" hidden></span>
+                    </div>
+
+                    <div class="rc-controls">
+                        <button class="rc-btn rc-btn-primary" id="pick" type="button">
+                            <i class="fas fa-dice"></i> 随机点名
+                        </button>
+                        <label class="rc-toggle">
+                            <input type="checkbox" id="unique" checked>
+                            <span class="rc-toggle-track"></span>
+                            <span class="rc-toggle-label">不重复（抽过的暂时移除）</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="rc-meta" id="meta"></div>
+            </div>
+
+            <div class="home-note">名单已从班级成绩表导入（39 人）；如需增删，直接编辑页面源码里的 STUDENTS 数组。</div>
+        </section>
+    </main>
+
+    <footer class="site-foot">
+        <div class="shell">
+            <span>END | 点名器</span>
+            <span><span class="mark-dot"></span>点到谁就是谁</span>
+        </div>
+    </footer>
+
+    <script>
+        // ===== 名单：已从班级成绩表（1a18602ddb0_8a3.xlsx）导入，共 39 人 =====
+        // 如需增删，直接编辑下面数组即可，逗号分隔。
+        var STUDENTS = [
+            "李望攸", "王诗萌", "张斯奕", "李骁洋", "王璟宁",
+            "丁漪祎", "邱梓恒", "杨凌羽", "陶梓柠", "王思博",
+            "高晨", "向梓涵", "梁文泓", "周子桐", "武玲妃",
+            "徐宇辰", "罗紫辰", "蔡希贤", "高曼豪", "张晴源",
+            "折致尧", "赵博歆", "王奕淳", "周茗", "张丹茗萱",
+            "周楚晴", "张芳源", "谢昕朔", "桂艺丹", "赵婉婷",
+            "王迅彤", "方玟鑫", "罗诗淼", "康慷", "张云轩",
+            "张梓尧", "高睿楷", "王思淇", "谢瑞昊"
+        ];
+
+        // ===== 权重：想加大某人被抽中的概率，在这里设置 =====
+        // 不在此表中的同学默认权重 1；权重 3 = 中签概率是普通同学的 3 倍；
+        // 权重 0 = 永远不会被抽到（请假/免抽可用）。页面上不会显示权重。
+        var WEIGHTS = {
+            // "李望攸": 3,
+            // "王诗萌": 0
+        };
+
+        function weightOf(name) {
+            return WEIGHTS.hasOwnProperty(name) ? WEIGHTS[name] : 1;
+        }
+
+        var display = document.getElementById("display");
+        var placeholder = document.getElementById("placeholder");
+        var result = document.getElementById("result");
+        var pickBtn = document.getElementById("pick");
+        var uniqueBox = document.getElementById("unique");
+        var meta = document.getElementById("meta");
+
+        var pool = [];
+
+        function resetPool() {
+            pool = STUDENTS.filter(function (name) {
+                return weightOf(name) > 0; /* 权重为 0 的同学不进入候选池 */
+            });
+            meta.textContent = "名单 " + STUDENTS.length + " 人 · 待抽 " + pool.length + " 人";
+        }
+
+        function draw() {
+            if (pool.length === 0) {
+                resetPool();
+                if (pool.length === 0) { /* 名单里所有人权重都是 0，没有可抽的人 */
+                    result.textContent = "名单为空，检查一下 WEIGHTS";
+                    result.classList.add("rc-done");
+                    return;
+                }
+                if (uniqueBox.checked) {
+                    result.textContent = "都抽完啦，重新开始";
+                    result.classList.add("rc-done");
+                    return;
+                }
+            }
+
+            /* 按权重抽取：把每个人的权重想成手里的“票数”，随机落在谁的票上 */
+            var total = 0;
+            var weights = pool.map(function (name) {
+                var w = weightOf(name);
+                total += w;
+                return w;
+            });
+
+            var r = Math.random() * total;
+            if (total === 0) { /* 候选池里所有人权重都是 0 */
+                result.textContent = "名单为空，检查一下 WEIGHTS";
+                result.classList.add("rc-done");
+                return;
+            }
+            var idx = pool.length - 1;
+            for (var i = 0; i < pool.length; i++) {
+                r -= weights[i];
+                if (r < 0) {
+                    idx = i;
+                    break;
+                }
+            }
+            var name = pool[idx];
+            if (uniqueBox.checked) {
+                pool.splice(idx, 1);
+            }
+
+            placeholder.hidden = true;
+            result.hidden = false;
+            result.textContent = name;
+            result.classList.remove("rc-done");
+            result.classList.remove("rc-anim");
+            void result.offsetWidth; /* 重置动画，让每次抽取都有弹出效果 */
+            result.classList.add("rc-anim");
+            meta.textContent = "名单 " + STUDENTS.length + " 人 · 待抽 " + pool.length + " 人";
+        }
+
+        pickBtn.addEventListener("click", draw);
+        uniqueBox.addEventListener("change", resetPool);
+        resetPool();
+    </script>
+</body>
+</html>
